@@ -5,14 +5,14 @@
 
 using namespace fileHandle;
 
-outHandle& outHandle::operator<<(const std::string mesg )
+outHandle& outHandle::operator<<(const std::string mesg)
 {
     std::cout << mesg << " \t ";
     f << mesg << " \t ";
     return *this;
 }
 
-outHandle& outHandle::operator<<(const char mesg )
+outHandle& outHandle::operator<<(const char mesg)
 {
     if(mesg != endl)
 	{	
@@ -26,18 +26,26 @@ outHandle& outHandle::operator<<(const char mesg )
     return *this;
 }
 
-outHandle& outHandle::operator<<(const int mesg )
+outHandle& outHandle::operator<<(const int mesg)
 {
     std::cout << mesg << " \t ";
     f << mesg << " \t ";
     return *this;
 }
 
-outHandle& outHandle::operator<<(const double mesg )
+outHandle& outHandle::operator<<(const double mesg)
 {
     std::cout << mesg << " \t ";
     f << mesg << " \t ";
     return *this;
+}
+
+outHandle& outHandle::operator%(const std::string mesg)
+{
+    std::cout << "Error: " << mesg << "!\nExiting...";
+    f << "Error: " << mesg << "!\nExiting...";
+    f.close();
+    exit(1);
 }
 
 void outHandle::open(std::string fname)
