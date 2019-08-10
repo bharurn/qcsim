@@ -17,11 +17,11 @@ namespace fileHandle
 			outHandle(std::string fname);
 			~outHandle();
 			
-			outHandle& operator<<(  const std::string mesg );
-			outHandle& operator<<(  const char mesg );
-			outHandle& operator<<(const int mesg );
-			outHandle& operator<<(  const double mesg );
-		
+			outHandle& operator<<(const std::string mesg);
+			outHandle& operator<<(const char mesg);
+			outHandle& operator<<(const int mesg);
+			outHandle& operator<<(const double mesg);
+			outHandle& operator%(const std::string mesg);		
 		private:
 			std::ofstream f;		
 	};
