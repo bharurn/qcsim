@@ -14,9 +14,9 @@ class hfHandle
 	public:
 	
 		void work();
-		void init(std::string fname);
+		void init(std::string in, std::string out);
 		hfHandle();
-		hfHandle(std::string fname);
+		hfHandle(std::string in, std::string out);
 		
 	private: 
 	
