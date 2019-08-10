@@ -2,6 +2,6 @@
 
 int main()
 {
-	hfHandle hf("data.integrals");
+	hfHandle hf("data.integrals", "data.out");
 	hf.work();
 }
