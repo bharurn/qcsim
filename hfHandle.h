@@ -3,6 +3,7 @@
 
 #include <Eigen/Dense>
 #include <cmath>
+#include "fileHandle/filehandle.h"
 
 #define SUM(N) N*(N+1)/2
 
@@ -22,6 +23,7 @@ class hfHandle
 		double E_nuc, E_elec, Eprev, acc;
 		MatrixXd overlap, Hcore, two_e, S_inv_sqrt, fock, C, D, Dprev;
 		int no, no_e,s_no;
+		fileHandle::outHandle o;
 	
 		int AtomToIndex(int i, int j, int k, int l)
 		{
@@ -48,6 +50,8 @@ class hfHandle
 		}
 		
 		void coreSCF();
+		
+		double getTotalE(){ return E_elec+E_nuc; }
 	
 };
 
