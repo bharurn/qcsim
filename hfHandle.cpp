@@ -6,16 +6,16 @@
 #include "fileHandle/filehandle.h"
 #include "hfHandle.h"
 
-hfHandle::hfHandle() { }
+hfHandle::hfHandle(){ }
 
-hfHandle::hfHandle(std::string fname) {	init(fname); }
+hfHandle::hfHandle(std::string in, std::string out){ init(in, out); }
 
-void hfHandle::init(std::string fname)
+void hfHandle::init(std::string in, std::string out)
 {
 	std::ifstream intgrl;
-	intgrl.open(fname.c_str());
+	intgrl.open(in.c_str());
 	
-	o.open("output.txt");
+	o.open(out);
 	
 	double val;
 	int i, j, k, l;
@@ -24,7 +24,7 @@ void hfHandle::init(std::string fname)
 	
 	if(no_e/2 > no)
 	{
-		o << "Error: No. of atoms and electons mismatch!";
+		o % "No. of atoms and electons mismatch";
 	}
 
 	intgrl >> i >> j >> val;
