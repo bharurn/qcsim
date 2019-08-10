@@ -3,22 +3,19 @@
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues> 
 #include <sstream>
+#include "fileHandle/filehandle.h"
 #include "hfHandle.h"
 
-hfHandle::hfHandle()
-{
-	
-}
+hfHandle::hfHandle() { }
 
-hfHandle::hfHandle(std::string fname)
-{
-	init(fname);
-}
+hfHandle::hfHandle(std::string fname) {	init(fname); }
 
 void hfHandle::init(std::string fname)
 {
 	std::ifstream intgrl;
 	intgrl.open(fname.c_str());
+	
+	o.open("output.txt");
 	
 	double val;
 	int i, j, k, l;
@@ -27,7 +24,7 @@ void hfHandle::init(std::string fname)
 	
 	if(no_e/2 > no)
 	{
-		std::cout << "Error: No. of atoms and electons mismatch!";
+		o << "Error: No. of atoms and electons mismatch!";
 	}
 
 	intgrl >> i >> j >> val;
@@ -108,8 +105,8 @@ void hfHandle::init(std::string fname)
 			E_elec += D(i,j)*(Hcore(i,j) + fock(i,j));
 			
 	Eprev = E_elec;
-	
-	std::cout << E_elec << '\n';
+	o << "Iter" << "E(elec)" << "E(tot)" << "deltaE" << fileHandle::endl;
+	o << '0' << E_elec << getTotalE() << "  --- " << fileHandle::endl;
 }
 
 void hfHandle::coreSCF()
@@ -153,14 +150,15 @@ void hfHandle::coreSCF()
 
 void hfHandle::work()
 {
+	int i=0;
 	do
 	{
 		Eprev = E_elec;
 		
 		coreSCF();
+		i++;
 		
-		std::cout << E_elec << " " << E_elec-Eprev << '\n';
+		o << i << E_elec << getTotalE() << E_elec-Eprev << fileHandle::endl;
 	}while(!converged());
 }
-
 
